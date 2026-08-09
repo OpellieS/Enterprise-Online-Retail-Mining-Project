@@ -1,0 +1,62 @@
+Feature,Importance
+average_unique_products_per_order,339
+average_units_per_order,281
+total_historical_revenue,236
+average_days_between_orders,222
+unique_products,221
+revenue_last_90d,211
+tenure_days,210
+std_order_value,187
+units_last_60d,141
+units_last_90d,133
+max_order_value,130
+revenue_last_60d,123
+days_since_last_purchase,122
+units_last_30d,115
+mean_order_value,101
+median_order_value,97
+revenue_last_30d,64
+spend_60_vs_previous_60,55
+active_purchase_days,41
+country_United Kingdom,37
+spend_30_vs_previous_30,28
+orders_last_60d,23
+orders_last_30d,18
+transaction_frequency,15
+order_frequency_momentum,13
+orders_last_90d,10
+country_Germany,4
+country_France,2
+country_Spain,1
+country_Malta,0
+country_Poland,0
+country_Lithuania,0
+country_Netherlands,0
+country_Norway,0
+country_Switzerland,0
+country_Portugal,0
+country_Saudi Arabia,0
+country_Singapore,0
+country_Sweden,0
+country_USA,0
+country_United Arab Emirates,0
+country_Japan,0
+country_Lebanon,0
+country_Canada,0
+country_Italy,0
+country_Cyprus,0
+country_Australia,0
+country_Austria,0
+country_Bahrain,0
+country_Belgium,0
+country_Brazil,0
+country_Channel Islands,0
+country_Czech Republic,0
+country_Israel,0
+country_Denmark,0
+country_EIRE,0
+country_European Community,0
+country_Finland,0
+country_Greece,0
+country_Iceland,0
+country_Unspecified,0

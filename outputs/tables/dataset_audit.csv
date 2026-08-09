@@ -1,0 +1,24 @@
+Metric,Value,Classification
+raw_row_count,541909,OBSERVED DATA
+column_count,8,OBSERVED DATA
+date_min,2010-12-01T08:26:00,OBSERVED DATA
+date_max,2011-12-09T12:50:00,OBSERVED DATA
+unique_invoices,25900,OBSERVED DATA
+unique_customers,4372,OBSERVED DATA
+unique_products,4070,OBSERVED DATA
+countries,38,OBSERVED DATA
+missing_CustomerID,135080,OBSERVED DATA
+missing_Description,1454,OBSERVED DATA
+missing_InvoiceNo,0,OBSERVED DATA
+missing_InvoiceDate,0,OBSERVED DATA
+malformed_dates,0,OBSERVED DATA
+non_numeric_quantities,0,OBSERVED DATA
+non_numeric_prices,0,OBSERVED DATA
+zero_quantities,0,OBSERVED DATA
+negative_quantities,10624,OBSERVED DATA
+zero_prices,2515,OBSERVED DATA
+negative_prices,2,OBSERVED DATA
+cancelled_invoice_rows,9288,OBSERVED DATA
+duplicate_rows,5268,OBSERVED DATA
+quantity_above_positive_p99.9_480,576,DATA-DRIVEN DIAGNOSTIC; not automatically removed
+price_above_positive_p99.9_206.392,540,DATA-DRIVEN DIAGNOSTIC; not automatically removed

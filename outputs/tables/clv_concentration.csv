@@ -1,0 +1,7 @@
+Metric,Value
+Observed historical revenue share from top 10%,0.6145208192064804
+Predicted CLV share from top 10%,0.5480641954621055
+Predicted CLV share from top 20%,0.6766495645357656
+Customers required for 80% of predicted CLV,1537
+Customer share required for 80% of predicted CLV,0.3543107422775473
+Strict 80/20 pattern (top 20% >= 80% of CLV),False

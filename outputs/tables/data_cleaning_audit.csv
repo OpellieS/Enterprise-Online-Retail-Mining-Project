@@ -1,0 +1,10 @@
+Rule,RowsAffected,PercentOfRawRows,BusinessMeaning
+Missing CustomerID,135080,24.926694334288598,Cannot link the purchase event to a customer.
+Invalid CustomerID,0,0.0,Customer identifier is non-positive or non-integral.
+Missing/blank InvoiceNo,0,0.0,Cannot construct an invoice-level purchase event.
+Cancellation invoice (C/c prefix),9288,1.7139409015166756,"Reversal/cancellation, not a positive purchase event."
+Malformed/missing InvoiceDate,0,0.0,Cannot place the event on the customer timeline.
+Non-positive or non-numeric Quantity,10624,1.9604767590130447,"Return, reversal, or invalid unit quantity."
+Non-positive or non-numeric UnitPrice,2517,0.46446912673530055,No valid positive economic value.
+Exact duplicate line,5268,0.9721189350979592,Repeated source record; retain the first occurrence only.
+Any exclusion rule (deduplicated union),149217,27.53543491619442,Rows excluded from positive-purchase CLV modeling.

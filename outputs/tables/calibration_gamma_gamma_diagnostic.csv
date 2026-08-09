@@ -1,0 +1,3 @@
+Diagnostic,Correlation,PValue,Interpretation
+Pearson frequency vs monetary value,0.08409505479865859,0.00016149233287792364,Linear-association diagnostic only; does not prove independence.
+Spearman frequency vs monetary value,0.17552320435519056,2.3372336647140506e-15,Monotonic-association diagnostic only; does not prove independence.

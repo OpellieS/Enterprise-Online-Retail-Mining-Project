@@ -1,0 +1,12 @@
+ExclusionReasons,Rows
+Missing CustomerID,132186
+Cancellation invoice (C/c prefix) | Non-positive or non-numeric Quantity,8872
+Exact duplicate line,5192
+Missing CustomerID | Non-positive or non-numeric Quantity | Non-positive or non-numeric UnitPrice,1336
+Missing CustomerID | Non-positive or non-numeric UnitPrice,1136
+Missing CustomerID | Cancellation invoice (C/c prefix) | Non-positive or non-numeric Quantity,379
+Non-positive or non-numeric UnitPrice,40
+Missing CustomerID | Exact duplicate line,34
+Cancellation invoice (C/c prefix) | Non-positive or non-numeric Quantity | Exact duplicate line,33
+Missing CustomerID | Non-positive or non-numeric UnitPrice | Exact duplicate line,5
+Missing CustomerID | Cancellation invoice (C/c prefix) | Non-positive or non-numeric Quantity | Exact duplicate line,4

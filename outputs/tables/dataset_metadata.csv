@@ -1,0 +1,8 @@
+Field,Value
+source_file,Online_Retail.csv
+source_path,/Applications/MasterDegreeDS/961731 Business Data Analytis/Enterprise Online Retail Mining Project/data/raw/Online_Retail.csv
+sha256,5c1b5517919301b1da060b3dc486614f487da43515a9b2a52709e2b04d5da575
+rows,541909
+columns,8
+column_names,InvoiceNo | StockCode | Description | Quantity | InvoiceDate | UnitPrice | CustomerID | Country
+pandas_dtypes,InvoiceNo:object | StockCode:object | Description:object | Quantity:int64 | InvoiceDate:object | UnitPrice:float64 | CustomerID:float64 | Country:object

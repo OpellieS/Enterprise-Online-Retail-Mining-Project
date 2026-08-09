@@ -1,0 +1,6 @@
+Metric,Value,Classification
+Total predicted 12-month revenue run-rate,10369750.136465214,MODEL ESTIMATE
+Total predicted 12-month gross-margin run-rate,3110925.040939564,MODEL ESTIMATE + 30% COURSE ASSUMPTION
+Total discounted 12-month CLV,2955975.357860201,MODEL ESTIMATE + COURSE ASSUMPTIONS
+High-LTV/high-risk customer count,3.0,MODEL-DERIVED SEGMENT
+Discounted CLV in high-LTV/high-risk segment,20595.026974404595,MODEL ESTIMATE

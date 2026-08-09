@@ -1,0 +1,138 @@
+{
+  "dataset": {
+    "source_file": "Online_Retail.csv",
+    "sha256": "5c1b5517919301b1da060b3dc486614f487da43515a9b2a52709e2b04d5da575",
+    "raw_rows": 541909,
+    "raw_columns": 8,
+    "clean_rows": 392692,
+    "excluded_rows": 149217,
+    "invoice_events": 18532,
+    "date_min": "12/1/10 8:26",
+    "observation_end": "2011-12-09T12:50:00"
+  },
+  "customers": {
+    "usable": 4338,
+    "one_time": 1493,
+    "repeat": 2845,
+    "one_time_share": 0.3441678192715537,
+    "high_ltv_high_risk": 3
+  },
+  "validation": {
+    "calibration_end": "2011-09-10T12:50:00",
+    "holdout_end": "2011-12-09T12:50:00",
+    "bgnbd_order_mae": 1.0625615632347076,
+    "bgnbd_order_rmse": 2.104229339575785,
+    "bgnbd_gg_revenue_mae": 636.3067329896178,
+    "bgnbd_gg_revenue_rmse": 4125.398883466863,
+    "bgnbd_gg_top_decile_lift": 5.227318912196841,
+    "lightgbm_mae": 652.0274258330855,
+    "lightgbm_rmse": 4362.969094587067,
+    "lightgbm_top_decile_lift": 5.162564408251076,
+    "baseline_mae": 720.5099682565747,
+    "baseline_rmse": 4101.553356000838,
+    "baseline_top_decile_lift": 4.918164342475348
+  },
+  "gamma_gamma": {
+    "eligible_repeat_customers": 2845,
+    "pearson": 0.010656814129038652,
+    "spearman": 0.20934254762312432
+  },
+  "financial": {
+    "predicted_revenue_12m": 10369750.136465214,
+    "predicted_margin_12m": 3110925.040939564,
+    "discounted_clv_12m": 2955975.357860201,
+    "top_10_clv_share": 0.5480641954621055,
+    "top_20_clv_share": 0.6766495645357656,
+    "customer_share_for_80_clv": 0.3543107422775473,
+    "high_ltv_high_risk_clv": 20595.026974404595,
+    "retention_5_margin": 1029.7513487202298,
+    "retention_10_margin": 2059.5026974404595,
+    "retention_15_margin": 3089.254046160689,
+    "retention_10_break_even_per_customer": 686.5008991468198
+  },
+  "top_customers": [
+    {
+      "CustomerID": "16446",
+      "discounted_clv_12m": 138876.67766228344,
+      "probability_alive": 0.9832630804813686,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "14646",
+      "discounted_clv_12m": 72323.23983464367,
+      "probability_alive": 0.9996404273003751,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "18102",
+      "discounted_clv_12m": 62761.50020799073,
+      "probability_alive": 0.999633307024465,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "17450",
+      "discounted_clv_12m": 48941.82587242969,
+      "probability_alive": 0.9988491928864406,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "14096",
+      "discounted_clv_12m": 46360.98628447002,
+      "probability_alive": 0.9979707318980715,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "14911",
+      "discounted_clv_12m": 35057.9967796534,
+      "probability_alive": 0.9998368022977739,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "12415",
+      "discounted_clv_12m": 32675.010020100442,
+      "probability_alive": 0.9960226754110206,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "14156",
+      "discounted_clv_12m": 29064.75067322197,
+      "probability_alive": 0.9986910011503699,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "17511",
+      "discounted_clv_12m": 22382.973833037307,
+      "probability_alive": 0.9991683873868317,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    },
+    {
+      "CustomerID": "16029",
+      "discounted_clv_12m": 17612.76246874223,
+      "probability_alive": 0.8866442546700003,
+      "ltv_tier": "Whales",
+      "risk_tier": "Low latent risk"
+    }
+  ],
+  "warnings": {
+    "calibration": {
+      "bgnbd": [],
+      "gamma_gamma": []
+    },
+    "full_bgnbd": [],
+    "full_gamma_gamma": [],
+    "same_timestamp_repeat_customers": 4
+  },
+  "artifacts": {
+    "tables": 28,
+    "figures": 15
+  }
+}
