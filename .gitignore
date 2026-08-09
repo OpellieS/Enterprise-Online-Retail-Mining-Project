@@ -1,0 +1,13 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# The source data are reproducible but too large for Git.
+data/raw/*.csv
+
+# Temporary execution files.
+*.log
+
