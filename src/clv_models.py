@@ -73,21 +73,35 @@ def fit_gamma_gamma(frame: pd.DataFrame, penalizer_coef: float = 0.01):
     params = model.params_.astype(float)
     if not np.isfinite(params).all() or not params.gt(0).all():
         raise RuntimeError(f"Invalid Gamma-Gamma parameters: {params.to_dict()}")
-    if params.get("q", 0) <= 1:
-        raise RuntimeError("Gamma-Gamma population mean is undefined because q <= 1")
     return model, eligible, [str(w.message) for w in caught]
 
 
 def score_gamma_gamma(model, frame: pd.DataFrame) -> pd.DataFrame:
-    """Score repeat customers and use the model population mean for one-time buyers."""
+    """Score repeat customers; explicitly fall back when the population mean is undefined."""
     scored = frame.copy()
-    scored["expected_monetary_value"] = model.conditional_expected_average_profit(
-        scored["frequency"].astype(float), scored["monetary_value"].astype(float)
+    repeat = (scored["frequency"] > 0) & (scored["monetary_value"] > 0)
+    scored["expected_monetary_value"] = np.nan
+    scored.loc[repeat, "expected_monetary_value"] = model.conditional_expected_average_profit(
+        scored.loc[repeat, "frequency"].astype(float),
+        scored.loc[repeat, "monetary_value"].astype(float),
     )
+    if model.params_["q"] > 1:
+        fallback = float(model.params_["p"] * model.params_["v"] / (model.params_["q"] - 1))
+        fallback_label = "MODEL ESTIMATE — Gamma-Gamma population expectation for one-time buyer"
+    else:
+        fallback = float(
+            scored["historical_revenue"].sum()
+            / scored["historical_orders"].sum()
+        )
+        fallback_label = (
+            "OBSERVED DATA FALLBACK — cohort mean invoice value; "
+            "Gamma-Gamma population mean undefined because q <= 1"
+        )
+    scored.loc[~repeat, "expected_monetary_value"] = fallback
     scored["monetary_value_source"] = np.where(
-        scored["frequency"] > 0,
+        repeat,
         "MODEL ESTIMATE — individual Gamma-Gamma shrinkage",
-        "MODEL ESTIMATE — Gamma-Gamma population expectation for one-time buyer",
+        fallback_label,
     )
     if not (
         np.isfinite(scored["expected_monetary_value"]).all()
@@ -177,3 +191,34 @@ def model_parameters(bg_model, gg_model) -> pd.DataFrame:
         rows.append({"Model": "Gamma-Gamma", "Parameter": name, "Value": float(value)})
     return pd.DataFrame(rows)
 
+
+def bgnbd_penalizer_sensitivity(
+    frame: pd.DataFrame,
+    penalizers: tuple[float, ...] = (0.0, 0.0001, 0.001, 0.01, 0.1),
+    horizons: tuple[int, ...] = (30, 90, 180, 365),
+) -> pd.DataFrame:
+    """Expose numerical validity across penalties; do not select on accuracy."""
+    frequency, recency, tenure = _model_inputs(frame)
+    rows = []
+    for penalizer in penalizers:
+        row: dict[str, float | int | str | bool] = {"Penalizer": penalizer}
+        try:
+            model, caught = fit_bgnbd(frame, penalizer)
+            row.update({name: float(value) for name, value in model.params_.items()})
+            row["a_plus_b"] = float(model.params_["a"] + model.params_["b"])
+            for horizon in horizons:
+                with warnings.catch_warnings(), np.errstate(invalid="ignore", divide="ignore"):
+                    warnings.simplefilter("ignore", RuntimeWarning)
+                    prediction = model.conditional_expected_number_of_purchases_up_to_time(
+                        horizon, frequency, recency, tenure
+                    )
+                row[f"InvalidPredictions{horizon}d"] = int(
+                    (~np.isfinite(prediction)).sum()
+                )
+            row["FitWarnings"] = " | ".join(caught)
+            row["FitSucceeded"] = True
+        except Exception as exc:
+            row["FitSucceeded"] = False
+            row["FitWarnings"] = repr(exc)
+        rows.append(row)
+    return pd.DataFrame(rows)

@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 
 from src.clv_models import (
+    bgnbd_penalizer_sensitivity,
     fit_bgnbd,
     fit_gamma_gamma,
     model_parameters,
@@ -20,6 +21,7 @@ from src.clv_models import (
 from src.config import (
     ANNUAL_DISCOUNT_RATE,
     BGNBD_PENALIZER,
+    COURSE_BGNBD_PENALIZER,
     DATA_DIR,
     FIGURE_DIR,
     GAMMA_GAMMA_PENALIZER,
@@ -95,6 +97,7 @@ def run_full_analysis() -> dict:
     calibration, calibration_end, observation_end = make_calibration_holdout(
         invoices, HOLDOUT_DAYS, GROSS_MARGIN_RATE
     )
+    penalizer_sensitivity = bgnbd_penalizer_sensitivity(calibration)
     (
         calibration_bg,
         calibration_gg,
@@ -240,7 +243,8 @@ def run_full_analysis() -> dict:
             ("Gross margin rate", GROSS_MARGIN_RATE, "COURSE / SCENARIO ASSUMPTION; cost is absent"),
             ("Annual discount rate", ANNUAL_DISCOUNT_RATE, "COURSE / SCENARIO ASSUMPTION"),
             ("Effective monthly discount rate", (1 + ANNUAL_DISCOUNT_RATE) ** (1 / 12) - 1, "Derived from annual assumption"),
-            ("BG/NBD penalizer", BGNBD_PENALIZER, "COURSE BASELINE"),
+            ("BG/NBD penalizer course baseline", COURSE_BGNBD_PENALIZER, "COURSE BASELINE; numerically invalid for long-horizon scoring on this dataset"),
+            ("BG/NBD penalizer operational", BGNBD_PENALIZER, "MODEL IMPLEMENTATION — smallest tested positive penalty with finite 30–365 day predictions"),
             ("Gamma-Gamma penalizer", GAMMA_GAMMA_PENALIZER, "COURSE BASELINE"),
             ("Holdout days", HOLDOUT_DAYS, "TEMPORAL VALIDATION DESIGN"),
             ("Probability Alive risk threshold", RISK_THRESHOLD, "MODEL-DERIVED PROXY; not observed churn"),
@@ -254,6 +258,7 @@ def run_full_analysis() -> dict:
     _write(monetary_diagnostic, "gamma_gamma_assumption_diagnostic.csv")
     _write(model_metrics, "model_validation_metrics.csv")
     _write(parameters, "model_parameters.csv")
+    _write(penalizer_sensitivity, "bgnbd_penalizer_sensitivity.csv")
     _write(monthly_clv, "monthly_clv_runrate.csv")
     _write(final_scores, "customer_clv_scores.csv")
     _write(action_matrix, "customer_action_matrix.csv")
@@ -364,4 +369,3 @@ def run_full_analysis() -> dict:
 if __name__ == "__main__":
     result = run_full_analysis()
     print(json.dumps(result, indent=2))
-
