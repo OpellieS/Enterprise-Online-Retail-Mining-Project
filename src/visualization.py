@@ -187,5 +187,25 @@ def generate_all_figures(
     ax.ticklabel_format(style="plain", axis="y")
     _finish(fig, path); files.append(path)
 
-    return files
+    path = figure_dir / "15_empirical_repeat_rate_by_recency.png"
+    empirical = bg_validation.assign(
+        RecencyBin=pd.qcut(
+            bg_validation["days_since_last_purchase"], q=10, duplicates="drop"
+        ),
+        Repeated=bg_validation["actual_holdout_orders"].gt(0),
+    ).groupby("RecencyBin", observed=True).agg(
+        MeanRecency=("days_since_last_purchase", "mean"),
+        RepeatRate=("Repeated", "mean"),
+        Customers=("CustomerID", "size"),
+    )
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.plot(empirical["MeanRecency"], empirical["RepeatRate"], marker="o", color=color)
+    ax.set(
+        title="Empirical 90-Day Repeat Rate by Prior Recency",
+        xlabel="Mean days since last purchase in recency decile",
+        ylabel="Observed share purchasing in holdout",
+        ylim=(0, max(0.05, empirical["RepeatRate"].max() * 1.1)),
+    )
+    _finish(fig, path); files.append(path)
 
+    return files
